@@ -13,7 +13,7 @@ namespace TimeHunter\LaravelAlgorithmBundle\Sort\HeapSort;
  * Class HeapSort
  * @package TimeHunter\LaravelAlgorithmBundle\Sort\HeapSort
  */
-class HeapSort
+class Heap
 {
 
 
@@ -76,7 +76,7 @@ class HeapSort
      * @param $array
      * @return array
      */
-    public function maxHeapSort($array)
+    public function maxHeapSort(&$array)
     {
         // make an initial heap first
         $this->buildMaxHeap($array);
@@ -95,6 +95,97 @@ class HeapSort
         }
 
         dump("done");
-        return $array;
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * Used to check the node if it satisfies the max heap requirement
+     * @param array $array
+     * @param $index
+     * @param $heapSize
+     */
+    public function minHeapify(&$array = [], $index, $heapSize)
+    {
+        dump("check index $index, value is $array[$index]");
+        while (true) {
+
+            $leftChildIndex = $index * 2 + 1;
+            $rightChildIndex = $index * 2 + 2;
+            $minValueIndex = $index; // set current index as max value pointer
+
+            // if left child less than min, then assign left to min
+            if ($leftChildIndex < $heapSize && $array[$leftChildIndex] < $array[$index]) {
+                $minValueIndex = $leftChildIndex;
+            }
+
+            // if right child less than min, then assign right to min
+            if ($rightChildIndex < $heapSize && $array[$rightChildIndex] < $array[$minValueIndex]) {
+                $minValueIndex = $rightChildIndex;
+            }
+
+            if ($minValueIndex === $index) {
+                dump("min $minValueIndex equal to index $index");
+                // if there is no more data less than current index
+                break;
+            } else {
+
+                dump("parent greater than child for index $index, swap it with min index $minValueIndex");
+                // swap the node
+                $temp = $array[$index];
+                $array[$index] = $array[$minValueIndex];
+                $array[$minValueIndex] = $temp;
+                $index = $minValueIndex;
+            }
+        }
+    }
+
+
+    /**
+     * Create one Max Heap by a given array
+     * @param $array
+     */
+    public function buildMinHeap(&$array)
+    {
+
+        $length = count($array);
+        $start = (int)floor($length / 2 - 1);
+
+        for ($i = $start; $i >= 0; $i--) {
+
+            $this->minHeapify($array, $i, $length);
+        }
+    }
+
+    /**
+     * @param $array
+     * @return array
+     */
+    public function minHeapSort(&$array)
+    {
+        // make an initial heap first
+        $this->buildMinHeap($array);
+
+        $length = count($array);
+
+        // loop through right first, which means bottom-up search
+        for ($i = $length - 1; $i >= 1; $i--) {
+            // swap the root node with last node, so the the root node swap to
+            $temp = $array[0]; // current smallest node
+            $array[0] = $array[$i]; // assign last node (end of array) to replace 0 index
+            $array[$i] = $temp; // assign the biggest node to be last node
+
+            // so the $i decrease, and right-side child will be kept as in order
+            $this->minHeapify($array, 0, $i);
+        }
+
+        dump("done");
+        dump($array);
     }
 }

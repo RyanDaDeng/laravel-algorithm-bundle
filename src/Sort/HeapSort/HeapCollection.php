@@ -9,8 +9,9 @@
 namespace TimeHunter\LaravelAlgorithmBundle\Sort\HeapSort;
 
 
-class HeapSortBundle extends HeapSort
+class HeapCollection extends Heap
 {
+
 
     /**
      * @param array $array
@@ -30,11 +31,20 @@ class HeapSortBundle extends HeapSort
      */
     public function findKLargestElements($array = [], $k)
     {
-        $array = $this->maxHeapSort($array);
+        // make k sized heap array
         $res = [];
-        $size = sizeof($array);
-        for ($i = $size - 1; $i > $size - $k - 1; $i--) {
+        for ($i = 0; $i < $k; $i++) {
             $res[] = $array[$i];
+        }
+
+        $this->buildMinHeap($res);
+
+        $size = sizeof($array);
+        for ($i = $k; $i < $size; $i++) {
+            if ($res[0] < $array[$i]) {
+                $res[0] = $array[$i];
+                $this->buildMinHeap($res);
+            }
         }
         return $res;
     }
@@ -57,7 +67,7 @@ class HeapSortBundle extends HeapSort
 
         $size = sizeof($array);
         for ($i = $k; $i < $size; $i++) {
-            if($res[0] > $array[$i]){
+            if ($res[0] > $array[$i]) {
                 $res[0] = $array[$i];
                 $this->buildMaxHeap($res);
             }
@@ -66,23 +76,24 @@ class HeapSortBundle extends HeapSort
     }
 
 
-    public function findKFrequentElements($map = [], $k)
+    //todo
+    public function findKFrequentElementsByMap($map = [], $k)
     {
         $valueToKey = [];
         $values = [];
         foreach ($map as $key => $value) {
-            $valueToKey[$value] = $key;
+            $valueToKey[$value][] = $key;
             $values[] = $value;
         }
 
-        $array = $this->maxHeapSort($values);
-
+        dd($valueToKey);
+        $data = $this->findKLargestElements($values, $k);
         $res = [];
 
-        $size = sizeof($array);
+        $size = sizeof($data);
 
         for ($i = $size - 1; $i > $size - $k - 1; $i--) {
-            $res[] = $valueToKey[$array[$i]];
+            $res[] = $valueToKey[$data[$i]];
         }
         return $res;
     }
