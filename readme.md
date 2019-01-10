@@ -10,9 +10,11 @@ The Algothmns will be written as OOP based.
 
 ## Supported Algorithm
 
-Completed Algorithms:
+All algorithms support general methods, below just a list of additional APIs.
 
-1. Heap Sort, Max Heap, Min Heap (Under development)
+### Heap Sort, Max Heap, Min Heap (Under development)
+
+APIs:
    1. findKLargestElements($array = [], $k)
    1. findKSmallestElements($array = [], $k)
    1. findKFrequentElementsByMap($map = [], $k)
