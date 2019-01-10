@@ -13,10 +13,6 @@ The Algothmns will be written as OOP based.
 Completed Algorithms:
 
 1. Heap Sort, Max Heap, Min Heap (Under development)
-1.1. dd
-
-
-1. Heap Sort, Max Heap, Min Heap (Under development)
    1. findKLargestElements($array = [], $k)
    1. findKSmallestElements($array = [], $k)
    1. findKFrequentElementsByMap($map = [], $k)
