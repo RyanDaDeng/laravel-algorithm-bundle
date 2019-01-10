@@ -8,6 +8,10 @@ All the algorthmns will be done by myself with covered test cases.
 
 The Algothmns will be written as OOP based.
 
+## Contributing
+
+If you want to add one more algorithm or finding bugs, please make PR or issue ticket.
+
 ## Supported Algorithm
 
 All algorithms support general methods, below just a list of additional APIs.
