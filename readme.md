@@ -2,7 +2,7 @@
 
 This package is not finished yet, please create an issue ticket if you have any concerns.
 
-An extended and easy to use Algorithm Bundle Package for Laravel.
+An extended and easy-to-use Algorithm Bundle Package for Laravel.
 
 All the algorthmns will be done by myself with covered test cases.
 
